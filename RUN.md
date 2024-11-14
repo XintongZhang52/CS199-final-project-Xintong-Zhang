@@ -40,8 +40,6 @@ impl Encryptor {
             }
         }
     }
-
-
     fn decrypt(&self) -> String {
         //tbc
     }
