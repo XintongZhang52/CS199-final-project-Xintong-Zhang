@@ -46,17 +46,14 @@ impl Encryptor {
 }
 
 fn main() {
-    // Example usage
-    let input_text = String::from("Hello, 世界!"); // Input with ASCII and non-ASCII characters
+    let input_text = String::from("Hello, 世界!"); 
     let mut encryptor = Encryptor::new(input_text);
 
-    // Encrypt the text
     encryptor.encrypt();
     println!("Encrypted text: {}", encryptor.encrypted_text);
     println!("Shift value: {}", encryptor.shift_value);
     println!("Non-ASCII map: {:?}", encryptor.non_ascii_map);
 
-    // Decrypt the text
     //let decrypted_text = encryptor.decrypt();
     //println!("Decrypted text: {}", decrypted_text);
 }
