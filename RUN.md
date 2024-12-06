@@ -45,12 +45,10 @@ impl Encryptor {
 
         for (index, ch) in self.encrypted_text.chars().enumerate() {
             if ch == 'x' {
-                // For 'x', get the original non-ASCII character from the map
                 if let Some(&original_char) = self.non_ascii_map.get(&index) {
                     decrypted_text.push(original_char);
                 }
             } else if ch.is_ascii() {
-                // Reverse the shift for ASCII characters
                 let shifted_char = ((ch as u8).wrapping_sub(self.shift_value as u8)) as char;
                 decrypted_text.push(shifted_char);
             }
@@ -70,5 +68,5 @@ fn main() {
     println!("Non-ASCII map: {:?}", encryptor.non_ascii_map);
 
     let decrypted_text = encryptor.decrypt();
-    //println!("Decrypted text: {}", decrypted_text);
+    println!("Decrypted text: {}", decrypted_text);
 }
