@@ -3,7 +3,6 @@
 /* I will implement a struct that stores the input text in string, encrypted text in string as well, and an int32 storing the ASCII number, and a map storing all characters unable to be represented as ASCII as keys, and their corresponding index as values.
 Also, their will be two functions, one encrypts the text, and one decrypts it. */
 
-
 use std::collections::HashMap;
 
 struct Encryptor {
@@ -32,14 +31,15 @@ impl Encryptor {
                     self.shift_value = ch as i32;
                     shift_set = true;
                 }
-                let shifted_char = ((ch as u8).wrapping_add(self.shift_value as u8)) as char;
-                self.encrypted_text.push(shifted_char);
+                let shifted_char = ((ch as u8).wrapping_add(self.shift_value as u8)) % 128;
+                self.encrypted_text.push(shifted_char as char);
             } else {
                 self.encrypted_text.push('x');
                 self.non_ascii_map.insert(index, ch);
             }
         }
     }
+
     fn decrypt(&self) -> String {
         let mut decrypted_text = String::new();
 
@@ -49,8 +49,8 @@ impl Encryptor {
                     decrypted_text.push(original_char);
                 }
             } else if ch.is_ascii() {
-                let shifted_char = ((ch as u8).wrapping_sub(self.shift_value as u8)) as char;
-                decrypted_text.push(shifted_char);
+                let shifted_char = ((ch as u8).wrapping_sub(self.shift_value as u8)) % 128;
+                decrypted_text.push(shifted_char as char);
             }
         }
 
